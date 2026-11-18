@@ -1,0 +1,71 @@
+<svg width="447" height="598" viewBox="0 0 447 598" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Noor's ceremony card, built up like the gallery's frames: the same two outlines as
+     ceremony_card_flat.svg (the arch frame and the panel set into it), now with
+     a face lit from above, a fine bevelled edge,
+     a lip where the panel sinks into it, and a shadow cast on the wall. -->
+<defs>
+  <path id="frame" d="M43.5 318.11C43.5 196.04 113.475 84.7773 223.5 31.9043C333.525 84.7773 403.5 196.04 403.5 318.11V557.404H43.5V318.11Z"/>
+  <path id="panel" d="M223.5 44C326.124 96.6746 391 202.59 391 318.544V547H56V318.544C56.0001 202.59 120.876 96.6746 223.5 44Z"/>
+
+  <!-- Face: lit from above, falling off toward the foot. -->
+  <linearGradient id="face" x1="223.5" y1="32" x2="223.5" y2="558" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#DCEBB0"/>
+    <stop offset="0.45" stop-color="#C5DC8F"/>
+    <stop offset="1" stop-color="#A8C273"/>
+  </linearGradient>
+  <!-- The outer edge: catching the light at the top, dark at the foot. -->
+  <linearGradient id="edge" x1="223.5" y1="32" x2="223.5" y2="558" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#F2F8DF"/>
+    <stop offset="0.5" stop-color="#B9CF86"/>
+    <stop offset="1" stop-color="#5F7740"/>
+  </linearGradient>
+  <!-- The lip round the panel, reversed: a sunken edge is in shade at the top. -->
+  <linearGradient id="lip" x1="223.5" y1="32" x2="223.5" y2="558" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#7E9655"/>
+    <stop offset="0.5" stop-color="#A9C176"/>
+    <stop offset="1" stop-color="#EEF6D8"/>
+  </linearGradient>
+
+  <!-- The card's shadow on the marble: a tight, darker one where it meets the
+       wall and a softer one spreading below. Sized so the blur stays inside the
+       file's canvas - it is a background image and cannot paint past its box. -->
+  <filter id="cast" x="0" y="0" width="447" height="598" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b1"/>
+    <feOffset in="b1" dy="3" result="o1"/>
+    <feColorMatrix in="o1" type="matrix" values="0 0 0 0 0.3 0 0 0 0 0.18 0 0 0 0 0.12 0 0 0 0.42 0" result="near"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="b2"/>
+    <feOffset in="b2" dy="10" result="o2"/>
+    <feColorMatrix in="o2" type="matrix" values="0 0 0 0 0.3 0 0 0 0 0.18 0 0 0 0 0.12 0 0 0 0.45 0" result="far"/>
+    <feMerge><feMergeNode in="far"/><feMergeNode in="near"/></feMerge>
+  </filter>
+  <filter id="faceShade" x="43.5" y="31.9043" width="360" height="537.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+    <feOffset dy="12"/>
+    <feGaussianBlur stdDeviation="20"/>
+    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0.310623 0 0 0 0 0.413462 0 0 0 0 0.0691753 0 0 0 0.6 0"/>
+    <feBlend mode="normal" in2="shape"/>
+  </filter>
+  <filter id="panelShade" x="56" y="44" width="335" height="508" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+    <feOffset dx="0" dy="6"/>
+    <feGaussianBlur stdDeviation="6"/>
+    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0.352108 0 0 0 0 0.486538 0 0 0 0 0.0364903 0 0 0 0.9 0"/>
+    <feBlend mode="normal" in2="shape"/>
+  </filter>
+</defs>
+
+<!-- Shadow on the wall. -->
+<use href="#frame" fill="#000" filter="url(#cast)"/>
+<!-- The face, and its bevelled edge. -->
+<use href="#frame" fill="url(#face)" filter="url(#faceShade)"/>
+<use href="#frame" stroke="url(#edge)" stroke-width="2" stroke-linejoin="round"/>
+<!-- The panel, sunk into the face behind a lip. -->
+<use href="#panel" fill="#EFFFE8" filter="url(#panelShade)"/>
+<use href="#panel" stroke="url(#lip)" stroke-width="4" stroke-linejoin="round"/>
+</svg>
